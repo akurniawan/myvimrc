@@ -12,7 +12,7 @@ if has("gui_running")
   Plugin 'bling/vim-airline'
   Plugin 'tomtom/tcomment_vim'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'kien/ctrlp.vim'
+  Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'mileszs/ack.vim'
   Plugin 'scrooloose/syntastic'
 
@@ -54,7 +54,9 @@ if has("gui_running")
   let base16colorspace=256
   set background=dark
   colorscheme hybrid
-  set guifont=Inconsolata-g\ for\ Powerline:h10
+  if has("gui_macvim")
+    set guifont=Inconsolata-g\ for\ Powerline:h10
+  endif
   set guicursor=n-v-c-i:block-Cursor
   highlight Cursor guifg=black guibg=grey
   highlight iCursor guifg=black guibg=darkgrey
