@@ -56,6 +56,8 @@ if has("gui_running")
   colorscheme hybrid
   if has("gui_macvim")
     set guifont=Inconsolata-g\ for\ Powerline:h10
+  else
+    set guifont=Inconsolata-g\ for\ Powerline\ 10
   endif
   set guicursor=n-v-c-i:block-Cursor
   highlight Cursor guifg=black guibg=grey
