@@ -88,6 +88,7 @@ if has("gui_running")
   set hlsearch
   set ignorecase
   set incsearch
+
   " default indent for unknown file
   set shiftwidth=2
   set tabstop=2
