@@ -17,11 +17,13 @@ if has("gui_running")
   Plugin 'scrooloose/syntastic'
   Plugin 'tpope/vim-fugitive'
   Plugin 'Yggdroot/indentLine'
+  Plugin 'tpope/vim-surround'
 
   " syntax plugins
   Plugin 'fatih/vim-go'
   Plugin 'voithos/vim-python-syntax'
   Plugin 'Valloric/YouCompleteMe'
+  Plugin 'majutsushi/tagbar'
 
   call vundle#end()
 
@@ -31,14 +33,17 @@ if has("gui_running")
   set foldcolumn=1
   set foldnestmax=2
 
+  " tagbar configuration
+  let g:tagbar_expand=1
+
   " enable relative line number
   " set relativenumber
   " set number
 
   " enable indentLine and leadingSpace
-  let g:indentLine_enabled = 1
-  let g:indentLine_char = '|'
-  let g:indentLine_leadingSpaceEnabled = 1
+  let g:indentLine_enabled=1
+  let g:indentLine_char='|'
+  let g:indentLine_leadingSpaceEnabled=1
 
   " disable error beep
   set noeb vb t_vb=
@@ -158,8 +163,8 @@ if has("gui_running")
   vnoremap <leader>F zf
   nnoremap <leader>r :%s/
   nnoremap <leader>b :YcmCompleter GoToDefinition<CR>
-  nnoremap <leader>t :TlistToggle<CR>
-  inoremap <leader>t <ESC>:TlistToggle<CR>
+  nnoremap <leader>t :TagbarToggle<CR>
+  inoremap <leader>t <ESC>:TagbarToggle<CR>
   nnoremap <leader>z <c-r>
   nnoremap <ESC> :noh<CR><ESC>
   nnoremap tt 81\|i<CR>
