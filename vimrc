@@ -26,11 +26,14 @@ if has("gui_running")
   call vundle#end()
 
   " enable folding
-  set foldmethod=syntax
+  let g:python_folding=1
+  set foldmethod=indent
+  set foldcolumn=1
+  set foldnestmax=2
 
   " enable relative line number
-  set relativenumber
-  set number
+  " set relativenumber
+  " set number
 
   " enable indentLine and leadingSpace
   let g:indentLine_enabled = 1
