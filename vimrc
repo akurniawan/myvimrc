@@ -15,13 +15,27 @@ if has("gui_running")
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'mileszs/ack.vim'
   Plugin 'scrooloose/syntastic'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'Yggdroot/indentLine'
 
-  " sntax plugins
+  " syntax plugins
   Plugin 'fatih/vim-go'
   Plugin 'voithos/vim-python-syntax'
   Plugin 'Valloric/YouCompleteMe'
 
   call vundle#end()
+
+  " enable folding
+  set foldmethod=syntax
+
+  " enable relative line number
+  set relativenumber
+  set number
+
+  " enable indentLine and leadingSpace
+  let g:indentLine_enabled = 1
+  let g:indentLine_char = '|'
+  let g:indentLine_leadingSpaceEnabled = 1
 
   " disable error beep
   set noeb vb t_vb=
@@ -91,7 +105,7 @@ if has("gui_running")
   let g:airline#extensions#tabline#fnamemod=':t'
 
   " paste the last yanked characters in registry
-  vnoremap m "_d"0P
+  " vnoremap m "_d"0P
 
   " ctrl-p config
   let g:ctrlp_working_path_mode='ra'
