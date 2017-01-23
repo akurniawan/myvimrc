@@ -43,7 +43,6 @@ if has("gui_running")
   " enable indentLine and leadingSpace
   let g:indentLine_enabled=1
   let g:indentLine_char='|'
-  let g:indentLine_leadingSpaceEnabled=1
 
   " disable error beep
   set noeb vb t_vb=
@@ -77,9 +76,9 @@ if has("gui_running")
   set background=dark
   colorscheme hybrid
   if has("gui_macvim")
-    set guifont=Inconsolata-g\ for\ Powerline:h10
+    set guifont=Inconsolata\ for\ Powerline:h12
   else
-    set guifont=Inconsolata-g\ for\ Powerline\ 10
+    set guifont=Inconsolata\ for\ Powerline\ 12
   endif
   set guicursor=n-v-c-i:block-Cursor
   highlight Cursor guifg=black guibg=grey
