@@ -1,0 +1,66 @@
+"" Source your .vimrc
+"source ~/.vimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+let mapleader = ","
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+    "" Map <leader>d to start debug
+    "map <leader>d <Action>(Debug)
+
+    "" Map \b to toggle the breakpoint on the current line
+    "map \b <Action>(ToggleLineBreakpoint)
+
+
+" Find more examples here: https://jb.gg/share-ideavimrc
+inoremap kj <ESC>:w<CR>
+vnoremap < <gv
+vnoremap > >gv
+map zc <Action>(CollapseRegion)
+map zo <Action>(ExpandRegion)
+map <leader>zc <Action>(CollapseAllRegions)
+map <leader>zo <Action>(ExpandAllRegions)
+
+nnoremap == :action ReformatCode <CR>
+vnoremap == :action ReformatCode <CR>
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>o <Action>(FileStructurePopup)
+
+nnoremap <leader>fp :action FindInPath<CR>
+nnoremap <leader>gc :action GotoClass<CR>
+vnoremap <leader>gc :action GotoClass<CR>
+nnoremap <leader>gf :action GotoFile<CR>
+vnoremap <leader>gf :action GotoFile<CR>
+
+nnoremap <leader>u :action FindUsages<CR>
+
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gp :action GotoSuperMethod<CR>
+nnoremap gt :action GotoTest<CR>
+
+vnoremap <leader>re :action Replace<CR>
+nnoremap <leader>re :action Replace<CR>
+vnoremap / :action Find<CR>
+nnoremap / :action Find<CR>
+
+nnoremap cc :action CommentByLineComment <CR>
+vnoremap cc :action CommentByLineComment <CR>
+
+nnoremap R :action RenameElement <CR>
+nnoremap <leader>vv :action IntroduceVariable <cr>
+vnoremap <leader>vv :action IntroduceVariable <cr>
+nnoremap <leader>mm :action ExtractMethod  <Cr>
+vnoremap <leader>mm :action ExtractMethod  <Cr>
