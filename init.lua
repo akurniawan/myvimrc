@@ -106,12 +106,13 @@ require('lazy').setup({
   }, ]]
   {
     'neovim/nvim-lspconfig',
-    cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-    event = {'BufReadPre', 'BufNewFile'},
+    cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      {'hrsh7th/cmp-nvim-lsp'},
-      {'williamboman/mason-lspconfig.nvim'},
+      { 'williamboman/mason.nvim',          config = true },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'j-hui/fidget.nvim',                opts = {} },
+      { 'williamboman/mason-lspconfig.nvim' },
       'folke/neodev.nvim',
     },
     config = function()
@@ -124,7 +125,7 @@ require('lazy').setup({
       lsp_zero.on_attach(function(client, bufnr)
         -- see :help lsp-zero-keybindings
         -- to learn the available actions
-        lsp_zero.default_keymaps({buffer = bufnr})
+        lsp_zero.default_keymaps({ buffer = bufnr })
       end)
 
       require('mason-lspconfig').setup({
@@ -179,7 +180,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -254,42 +255,27 @@ require('lazy').setup({
       end,
     },
   },
-
-  --[[ {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  }, ]]
   {
     'sainnhe/gruvbox-material',
     name = 'gruvbox-material',
     priority = 1000,
     config = function()
-      vim.g.gruvbox_material_background = "hard"
+      vim.g.gruvbox_material_foreground = "mix"
+      vim.g.gruvbox_material_background = "soft"
       vim.g.gruvbox_material_enable_bold = "1"
+      vim.g.gruvbox_material_better_performance = 1
       vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
-  --[[ {
-    'rose-pine/neovim',
-    name = 'rose-pine',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'rose-pine'
-    end,
-  }, ]]
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
+    -- dependencies = { 'kyazdani42/nvim-web-devicons', },
     opts = {
       options = {
         icons_enabled = false,
-        -- theme = 'onedark',
-        theme = 'gruvbox',
+        theme = 'gruvbox-material',
         component_separators = '|',
         section_separators = '',
       },
@@ -333,6 +319,7 @@ require('lazy').setup({
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
+      'nvim-treesitter/nvim-treesitter-context',
       'nvim-treesitter/playground',
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -364,7 +351,12 @@ require('lazy').setup({
       require('Comment').setup()
     end
   },
-  {'akinsho/toggleterm.nvim', version = "*", config = true}
+  { 'akinsho/toggleterm.nvim', version = "*", config = true },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -564,7 +556,7 @@ end
 -- configure treesitter
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "python", "rust", "vim", "vimdoc", "query" },
+  ensure_installed = { "c", "cmake", "lua", "python", "rust", "vim", "vimdoc", "query" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -594,6 +586,21 @@ require('nvim-treesitter.configs').setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+}
+
+require('treesitter-context').setup {
+  enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
+  max_lines = 0,            -- How many lines the window should span. Values <= 0 mean no limit.
+  min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  line_numbers = true,
+  multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  trim_scope = 'outer',     -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  mode = 'cursor',          -- Line used to calculate context. Choices: 'cursor', 'topline'
+  -- Separator between context and content. Should be a single character string, like '-'.
+  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  separator = nil,
+  zindex = 20,     -- The Z-index of the context window
+  on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 }
 
 -- document existing key chains
@@ -632,7 +639,7 @@ local servers = {
   -- gopls = {},
   pyright = {},
   rust_analyzer = {
-  
+
   },
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
@@ -733,12 +740,8 @@ if vim.g.neovide then
   vim.g.neovide_remember_window_size = true
 end
 
---[[ require('gruvbox-material').setup {
-    style = 'medium'
-}
-require('gruvbox-material').load() ]]
-
-vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
+-- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
+vim.o.guifont = "Berkeley Mono:h11" -- text below applies for VimScript
 vim.o.guicursor = "n-v-c-i:block-Cursor"
 vim.wo.relativenumber = true
 vim.o.incsearch = true
@@ -746,3 +749,11 @@ vim.o.inccommand = "split"
 
 vim.keymap.set("i", "kj", "<C-c>:w<CR>")
 vim.keymap.set("v", "<leader>c", "gc")
+
+-- add autoformat after save
+--[[ vim.api.nvim_create_autocmd("BufWritePre", {
+  buffer = buffer,
+  callback = function()
+    vim.lsp.buf.format { async = false }
+  end
+}) ]]
