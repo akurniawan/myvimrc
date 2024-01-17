@@ -274,7 +274,7 @@ require('lazy').setup({
     -- dependencies = { 'kyazdani42/nvim-web-devicons', },
     opts = {
       options = {
-        icons_enabled = false,
+        icons_enabled = true,
         theme = 'gruvbox-material',
         component_separators = '|',
         section_separators = '',
@@ -736,13 +736,14 @@ cmp.setup {
 
 if vim.g.neovide then
   vim.g.neovide_cursor_animation_length = 0
-  vim.g.neovide_scroll_animation_length = 0.01
+  vim.g.neovide_scroll_animation_length = 0
   vim.g.neovide_remember_window_size = true
+  vim.g.neovide_hide_mouse_when_typing = true
 end
 
 -- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
 vim.o.guifont = "Berkeley Mono:h11" -- text below applies for VimScript
-vim.o.guicursor = "n-v-c-i:block-Cursor"
+vim.o.guicursor = ""
 vim.wo.relativenumber = true
 vim.o.incsearch = true
 vim.o.inccommand = "split"
@@ -757,3 +758,7 @@ vim.keymap.set("v", "<leader>c", "gc")
     vim.lsp.buf.format { async = false }
   end
 }) ]]
+
+require("toggleterm").setup {
+  open_mapping = [[<leader>tt]]
+}
