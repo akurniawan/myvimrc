@@ -739,6 +739,13 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0
   vim.g.neovide_remember_window_size = true
   vim.g.neovide_hide_mouse_when_typing = true
+
+  vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
+  vim.keymap.set('v', '<D-c>', '"+y') -- Copy
+  vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
+  vim.keymap.set('v', '<D-v>', '"+P') -- Paste visual mode
+  vim.keymap.set('c', '<D-v>', '<C-R>+') -- Paste command mode
+  vim.keymap.set('i', '<D-v>', '<ESC>l"+Pli') -- Paste insert mode
 end
 
 -- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
@@ -749,8 +756,18 @@ vim.o.incsearch = true
 vim.o.inccommand = "split"
 
 vim.keymap.set("i", "kj", "<C-c>:w<CR>")
-vim.keymap.set("v", "<leader>c", "gc")
+vim.keymap.set("n", "<leader>l", "<C-w>l")
+vim.keymap.set("n", "<leader>h", "<C-w>h")
+vim.keymap.set("n", "<leader>j", "<C-w>j")
+vim.keymap.set("n", "<leader>k", "<C-w>k")
 
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
+
+-- vim.keymap.set("n")
 -- add autoformat after save
 --[[ vim.api.nvim_create_autocmd("BufWritePre", {
   buffer = buffer,
@@ -760,5 +777,16 @@ vim.keymap.set("v", "<leader>c", "gc")
 }) ]]
 
 require("toggleterm").setup {
-  open_mapping = [[<leader>tt]]
+  open_mapping = [[<c-\>]]
 }
+
+-- function _G.set_terminal_keymaps()
+--   local opts = {buffer = 0}
+--   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+--   vim.keymap.set("t")
+-- end
+--
+-- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
+-- vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
+
+-- vim.keymap.set("n", "<leader>tt", ":ToggleTerm direction=float<CR>")
