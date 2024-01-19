@@ -320,7 +320,6 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-context',
-      'nvim-treesitter/playground',
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
@@ -556,7 +555,7 @@ end
 -- configure treesitter
 require('nvim-treesitter.configs').setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "cmake", "lua", "python", "rust", "vim", "vimdoc", "query" },
+  ensure_installed = { "c", "cpp", "cmake", "lua", "python", "rust", "vim", "vimdoc", "query" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -635,7 +634,9 @@ require('mason-lspconfig').setup()
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  clangd = {},
+  clangd = {
+
+  },
   -- gopls = {},
   pyright = {},
   rust_analyzer = {
