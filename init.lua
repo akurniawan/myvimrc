@@ -2,7 +2,7 @@
 
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
+f====================================================================
 
 Kickstart.nvim is *not* a distribution.
 
@@ -255,13 +255,23 @@ require('lazy').setup({
       end,
     },
   },
+  --[[ {
+    "sainnhe/edge",
+    name = "edge",
+    priority = 1000,
+    config = function()
+      vim.g.edge_style = "aura"
+      vim.g.enable_italic = "1"
+      vim.cmd.colorscheme 'edge'
+    end,
+  }, ]]
   {
     'sainnhe/gruvbox-material',
     name = 'gruvbox-material',
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_foreground = "mix"
-      vim.g.gruvbox_material_background = "soft"
+      vim.g.gruvbox_material_background = "hard"
       vim.g.gruvbox_material_enable_bold = "1"
       vim.g.gruvbox_material_better_performance = 1
       vim.cmd.colorscheme 'gruvbox-material'
@@ -276,9 +286,19 @@ require('lazy').setup({
       options = {
         icons_enabled = true,
         theme = 'gruvbox-material',
+        -- theme = 'edge',
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_c = {
+          {
+            "filename",
+            file_status = true,
+            path = 2
+          }
+        }
+      }
     },
   },
 
@@ -339,11 +359,11 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
-  {
+  --[[ {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
-  },
+  }, ]]
   {
     'numToStr/Comment.nvim',
     config = function()
@@ -363,7 +383,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -750,7 +770,7 @@ if vim.g.neovide then
 end
 
 -- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
-vim.o.guifont = "Berkeley Mono:h11" -- text below applies for VimScript
+vim.o.guifont = "Berkeley Mono:h10" -- text below applies for VimScript
 vim.o.guicursor = ""
 vim.wo.relativenumber = true
 vim.o.incsearch = true
@@ -768,26 +788,10 @@ vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true}
 vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true})
 
--- vim.keymap.set("n")
--- add autoformat after save
---[[ vim.api.nvim_create_autocmd("BufWritePre", {
-  buffer = buffer,
-  callback = function()
-    vim.lsp.buf.format { async = false }
-  end
-}) ]]
+-- Automatically toggling hlsearch after searching by just pressing "enter"
+vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { silent = true, expr = true })
 
 require("toggleterm").setup {
   open_mapping = [[<c-\>]]
 }
 
--- function _G.set_terminal_keymaps()
---   local opts = {buffer = 0}
---   vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
---   vim.keymap.set("t")
--- end
---
--- -- if you only want these mappings for toggle term use term://*toggleterm#* instead
--- vim.cmd('autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()')
-
--- vim.keymap.set("n", "<leader>tt", ":ToggleTerm direction=float<CR>")
