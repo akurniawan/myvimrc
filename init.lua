@@ -548,6 +548,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  nmap('go', function() require('telescope.builtin').lsp_definitions({ jump_type="vsplit" }) end, '[G]oto [D]efinition on new split')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -584,20 +585,12 @@ require('nvim-treesitter.configs').setup {
   -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
   auto_install = true,
 
-  -- List of parsers to ignore installing (or "all")
-  ignore_install = {},
-
   ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
   -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
 
   highlight = {
     enable = true,
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = {},
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -771,16 +764,46 @@ end
 
 -- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
 vim.o.guifont = "Berkeley Mono:h10" -- text below applies for VimScript
-vim.o.guicursor = ""
+vim.o.guicursor = "n-v-c:block-Cursor/lCursor-blinkon1000-blinkoff1000"
 vim.wo.relativenumber = true
 vim.o.incsearch = true
 vim.o.inccommand = "split"
+vim.o.scrolloff = 8
+vim.o.updatetime = 750
+vim.o.colorcolumn = "120"
+vim.o.swapfile = false
+vim.o.backup = false
+vim.o.wrap = true
+vim.o.tabstop = 4
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.o.splitright = true
 
 vim.keymap.set("i", "kj", "<C-c>:w<CR>")
 vim.keymap.set("n", "<leader>l", "<C-w>l")
 vim.keymap.set("n", "<leader>h", "<C-w>h")
 vim.keymap.set("n", "<leader>j", "<C-w>j")
 vim.keymap.set("n", "<leader>k", "<C-w>k")
+
+-- Amazing shit from theprimeagen
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- Move selected lines up and down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Combining lines like in vscode but better
+vim.keymap.set("n", "J", "mzJ`z")
+-- Move half pages while keeping the cursor in the middle
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- Keeping the cursor in the middle while searching
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+-- Keeping the previous copy buffer intact while selecting other text
+vim.keymap.set("x", "<leader>p", "\"_dP")
+-- Replace current word below the cursor
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left>")
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true})
@@ -794,4 +817,3 @@ vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { si
 require("toggleterm").setup {
   open_mapping = [[<c-\>]]
 }
-
