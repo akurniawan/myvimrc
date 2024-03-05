@@ -764,7 +764,7 @@ end
 
 -- vim.o.guifont = "Fira Code:h12" -- text below applies for VimScript
 vim.o.guifont = "Berkeley Mono:h10" -- text below applies for VimScript
-vim.o.guicursor = "n-v-c:block-Cursor/lCursor-blinkon1000-blinkoff1000"
+vim.o.guicursor = "n-v-c-i:block-Cursor/lCursor-blinkwait100-blinkon500-blinkoff500"
 vim.wo.relativenumber = true
 vim.o.incsearch = true
 vim.o.inccommand = "split"
@@ -817,3 +817,4 @@ vim.keymap.set("n", "<CR>", [[{-> v:hlsearch ? ":nohl\<CR>" : "\<CR>"}()]], { si
 require("toggleterm").setup {
   open_mapping = [[<c-\>]]
 }
+
