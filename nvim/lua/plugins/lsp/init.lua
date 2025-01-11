@@ -38,7 +38,7 @@ return {
 		},
 		config = function()
 			require("mason-null-ls").setup({
-				ensure_installed = { "black", "isort", "stylua", "clang_format" },
+				ensure_installed = { "black", "isort", "stylua", "clang_format", "gofumpt" },
 				automatic_installation = true,
 			})
 
@@ -49,6 +49,7 @@ return {
 					null_ls.builtins.formatting.isort,
 					null_ls.builtins.formatting.stylua,
 					null_ls.builtins.formatting.clang_format,
+					null_ls.builtins.formatting.gofumpt,
 				},
 			})
 		end,

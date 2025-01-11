@@ -78,7 +78,7 @@ return {
 		"numToStr/Comment.nvim",
 		opts = {},
 	},
-	{
+	--[[ {
 		"VonHeikemen/fine-cmdline.nvim",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
@@ -109,5 +109,5 @@ return {
 				},
 			})
 		end,
-	},
+	}, ]]
 }

@@ -23,6 +23,29 @@ local servers = {
 			-- diagnostics = { disable = { 'missing-fields' } },
 		},
 	},
+	gopls = {
+		settings = {
+			gopls = {
+				analyses = {
+					unusedparams = true,
+				},
+				staticcheck = true,
+				gofumpt = true,
+				codelenses = {
+					gc_details = true,
+					generate = true,
+					regenerate_cgo = true,
+					test = true,
+					tidy = true,
+				},
+				-- Add these formatting settings
+				formatting = {
+					gofumpt = true,
+				},
+				usePlaceholders = true,
+			},
+		},
+	},
 }
 
 -- LSP on_attach function

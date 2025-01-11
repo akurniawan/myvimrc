@@ -8,6 +8,7 @@ return {
 	require("plugins.sg"),
 	require("plugins.nvim-tree"),
 	-- require("plugins.jukit"),
+	require("plugins.noice"),
 	require("plugins.editor"), -- Load UI plugins first
 	require("plugins.lsp"), -- LSP configurations
 	require("plugins.completion"), -- Completion
