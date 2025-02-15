@@ -112,7 +112,11 @@ end)
 keymap("n", "<leader>rb", function()
   require("refactoring").refactor("Extract Block")
 end)
+-- Extract block supports only normal mode
 keymap("n", "<leader>rbf", function()
   require("refactoring").refactor("Extract Block To File")
 end)
--- Extract block supports only normal mode
+
+-- Remapping for window sizign
+keymap("n", "<M-h>", ":vertical resize -5<CR>")
+keymap("n", "<M-l>", ":vertical resize +5<CR>")
